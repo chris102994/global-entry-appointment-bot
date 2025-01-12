@@ -4,12 +4,6 @@ on:
   workflow_dispatch:
   workflow_call:
 
-permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  checks: write
-
 concurrency:
     group: ${{ github.head_ref || github.ref }}
 
