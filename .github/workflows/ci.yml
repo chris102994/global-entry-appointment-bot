@@ -1,0 +1,11 @@
+---
+name: CI
+run-name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  call_workflow:
+    uses: './.github/workflows/workflow.yml'
+    secrets: inherit
