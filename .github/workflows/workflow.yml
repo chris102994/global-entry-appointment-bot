@@ -28,6 +28,10 @@ jobs:
   call_build_push_docker:
     uses: './.github/workflows/build_push_docker.yml'
     secrets: inherit
+    with:
+      release: ${{ needs.set_vars.outputs.release == 'true' }}
+    needs:
+      - set_vars
   call_release:
     uses: './.github/workflows/release.yml'
     secrets: inherit
