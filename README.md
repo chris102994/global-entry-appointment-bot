@@ -14,13 +14,12 @@ Sure there are services that do this for you at a cost but why do that when you 
 ### Installation
 
 #### Binary
-```shell
-# TODO
-```
+Download the appropriate binary for your OS/CPU from releases.
 
 #### Docker
 ```shell
-# TODO
+# Your local directory in this case contains your `config.yaml` file.
+docker run -e TZ="America/New_York" -v $(pwd):/config ghcr.io/chris102994/global-entry-appointment-bot:latest
 ```
 
 ### Usage
