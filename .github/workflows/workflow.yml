@@ -39,4 +39,4 @@ jobs:
       upload_url: ${{ needs.call_release.outputs.upload_url }}
     needs:
       - set_vars
-      - call_release_binaries
+      - call_release
