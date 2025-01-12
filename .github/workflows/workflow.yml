@@ -21,8 +21,8 @@ jobs:
           else
               echo "release=false" >> $GITHUB_OUTPUT
           fi
-  call_build:
-    uses: './.github/workflows/build.yml'
+  call_build_binaries:
+    uses: './.github/workflows/build_binaries.yml'
     secrets: inherit
   call_release:
     uses: './.github/workflows/release.yml'
@@ -31,8 +31,8 @@ jobs:
     needs:
       - set_vars
       - call_build
-  call_upload:
-    uses: './.github/workflows/upload.yml'
+  call_upload_binaries:
+    uses: './.github/workflows/upload_binaries.yml'
     secrets: inherit
     if: github.event_name == 'push' && needs.set_vars.outputs.release == 'true'
     with:

@@ -1,5 +1,5 @@
 ---
-name: upload
+name: upload binaries
 on:
   workflow_dispatch:
   workflow_call:
@@ -9,7 +9,7 @@ on:
         required: true
         type: string
 jobs:
-  upload:
+  upload_binaries:
     runs-on:
       - ubuntu-latest
     strategy:

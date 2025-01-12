@@ -1,11 +1,11 @@
 ---
-name: build
+name: build binaries
 on:
   workflow_dispatch:
   workflow_call:
 
 jobs:
-  build:
+  build_binaries:
     runs-on:
       - ubuntu-latest
     strategy:
