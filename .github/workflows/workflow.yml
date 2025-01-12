@@ -4,8 +4,15 @@ on:
   workflow_dispatch:
   workflow_call:
 
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  checks: write
+
 concurrency:
     group: ${{ github.head_ref || github.ref }}
+
 jobs:
   set_vars:
     runs-on:
@@ -23,6 +30,9 @@ jobs:
           fi
   call_build_binaries:
     uses: './.github/workflows/build_binaries.yml'
+    secrets: inherit
+  call_build_push_docker:
+    uses: './.github/workflows/build_push_docker.yml'
     secrets: inherit
   call_release:
     uses: './.github/workflows/release.yml'
