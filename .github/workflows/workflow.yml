@@ -30,7 +30,7 @@ jobs:
     if: github.event_name == 'push' && needs.set_vars.outputs.release == 'true'
     needs:
       - set_vars
-      - call_build
+      - call_build_binaries
   call_upload_binaries:
     uses: './.github/workflows/upload_binaries.yml'
     secrets: inherit
@@ -39,4 +39,4 @@ jobs:
       upload_url: ${{ needs.call_release.outputs.upload_url }}
     needs:
       - set_vars
-      - call_release
+      - call_release_binaries
