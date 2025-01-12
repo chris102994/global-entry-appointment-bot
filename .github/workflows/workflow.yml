@@ -36,6 +36,7 @@ jobs:
     needs:
       - set_vars
       - call_build_binaries
+      - call_build_push_docker
   call_upload_binaries:
     uses: './.github/workflows/upload_binaries.yml'
     secrets: inherit
