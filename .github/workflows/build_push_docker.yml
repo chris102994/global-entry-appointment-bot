@@ -43,7 +43,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=ref,event=tag
-            type=ref,value=latest
+            type=raw,value=latest
             type=sha,format=short
             type=sha,format=long
           labels: |
