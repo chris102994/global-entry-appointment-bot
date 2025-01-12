@@ -39,14 +39,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        tags:
+        tags: |
           type=ref,event=branch
           type=ref,event=pr
           type=ref,event=tag
           type=ref,value=latest
           type=sha,format=short
           type=sha,format=long
-        labels:
+        labels: |
           org.opencontainers.image.authors=${{ github.event.pusher.name }}
           org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
           org.opencontainers.image.description=${{ github.event.repository.description }}
@@ -61,7 +61,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms:
+          platforms: |
             linux/amd64
             linux/arm64
             windows/amd64
