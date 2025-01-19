@@ -12,6 +12,7 @@ import (
 	"os"
 	"strconv"
 	"time"
+	_ "time/tzdata"
 )
 
 type Appointment struct {
@@ -68,7 +69,7 @@ func GetAppointments(runConfig run.Run) ([]*Appointment, error) {
 	baseUrl := "https://ttp.cbp.dhs.gov/schedulerapi/slots"
 
 	customTransport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
 	}
 	client := &http.Client{
 		Transport: customTransport,

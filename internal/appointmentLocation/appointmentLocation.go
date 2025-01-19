@@ -59,7 +59,7 @@ func GetAppointmentLocations(state string) ([]*AppointmentLocation, error) {
 	baseUrl := "https://ttp.cbp.dhs.gov/schedulerapi/locations/"
 
 	customTransport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: false},
 	}
 	client := &http.Client{
 		Transport: customTransport,
