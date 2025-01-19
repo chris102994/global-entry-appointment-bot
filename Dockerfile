@@ -9,6 +9,9 @@ WORKDIR /work
 
 COPY ./ /work
 
+RUN apt install -y \
+        ca-certificates
+
 RUN --mount=type=cache,target=/root/.local/share/golang \
     --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
@@ -26,8 +29,11 @@ RUN --mount=type=cache,target=/root/.local/share/golang \
       -X 'main.Version=${VERSION:-N/A}'" \
     main.go
 
+
+
 FROM scratch
 COPY --from=builder /work/global-entry-appointment-bot .
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 USER 10000
 
 ENTRYPOINT ["./global-entry-appointment-bot", "run", "--config", "/config/config.yaml"]

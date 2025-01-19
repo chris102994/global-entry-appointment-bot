@@ -12,6 +12,7 @@ import (
 	"os"
 	"strconv"
 	"time"
+	_ "time/tzdata"
 )
 
 type Appointment struct {
