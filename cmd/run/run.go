@@ -25,7 +25,8 @@ var runCmd = &cobra.Command{
 				"cron": inputConfig.Cron,
 			}).Info("Cron mode")
 
-			c := cron.New()
+			logger := log.StandardLogger()
+			c := cron.New(cron.WithLogger(cron.VerbosePrintfLogger(logger)))
 			_, err := c.AddFunc(inputConfig.Cron.Expression, func() {
 				// Use the new helper function for repeated logic
 				err := handleAvailableAppointments()
