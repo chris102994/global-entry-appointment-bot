@@ -27,15 +27,10 @@ var runCmd = &cobra.Command{
 
 			logger := log.StandardLogger()
 			c := cron.New(cron.WithLogger(cron.VerbosePrintfLogger(logger)))
-			_, err := c.AddFunc(inputConfig.Cron.Expression, func() {
-				// Use the new helper function for repeated logic
-				err := handleAvailableAppointments()
-				if err != nil {
-					cobra.CheckErr(err)
-				}
-				log.Trace("Cron Schedule ran")
-			})
+			_, err := c.AddFunc(inputConfig.Cron.Expression, runGlobalEntryAppointmentBot)
 			cobra.CheckErr(err)
+
+			go runGlobalEntryAppointmentBot()
 
 			c.Run()
 
@@ -79,6 +74,13 @@ func init() {
 func NewRunCmd(c *config.Config) *cobra.Command {
 	inputConfig = c
 	return runCmd
+}
+
+func runGlobalEntryAppointmentBot() {
+	log.WithFields(log.Fields{}).Info("Running Cron Schedule")
+	err := handleAvailableAppointments()
+	cobra.CheckErr(err)
+	log.WithFields(log.Fields{}).Info("Cron Schedule ran")
 }
 
 func handleAvailableAppointments() error {
