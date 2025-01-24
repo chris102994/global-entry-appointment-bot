@@ -23,22 +23,34 @@ func (d *Discord) Run(message string) error {
 
 	discord, err := discordgo.New("Bot " + d.Token)
 	if err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("Error creating Discord session")
 		return err
 	}
 
 	err = discord.Open()
 	if err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("Error opening Discord session")
 		return err
 	}
 	defer discord.Close()
 
 	channel, err := discord.UserChannelCreate(d.UserID)
 	if err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("Error creating Discord channel")
 		return err
 	}
 
 	_, err = discord.ChannelMessageSend(channel.ID, message)
 	if err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Fatal("Error sending Discord message")
 		return err
 	}
 
